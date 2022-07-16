@@ -10,6 +10,7 @@ endif
 
 let g:loaded_gojson = 1
 
+" field_regex matches a struct field (in golang)
 const s:field_regex = '\v^\s*\w+\s+\w+$'
 
 if !exists('g:gojson_map_keys')
@@ -17,7 +18,9 @@ if !exists('g:gojson_map_keys')
 endif
 
 function! s:ApplyTags(count=0) abort
+  " Count is applied if the user enters this as a command over selected text
   if a:count > 1
+    " Get selected lines
     let lines = getline(line('.'), a:count)
     call s:ApplyTagsLoop(lines)
     return
@@ -32,15 +35,18 @@ function! s:ApplyTags(count=0) abort
 endfunction
 
 function! s:ApplyTagsOpFunc(type) abort
+  " Only works if motion is linewise
   if a:type !=? 'line'
     return
   endif
+  " Get text over motion
   let lines = getline("'[", "']")
   call s:ApplyTagsLoop(lines)
 endfunction
 
 function! s:ApplyTagsLoop(lines) abort
   let curline = line('.')
+  " Loop over the lines and apply a tag to them if they match the regex
   for l in a:lines
     if l !~? s:field_regex
       let curline += 1
@@ -58,6 +64,7 @@ function! s:AddJsonTag(l) abort
     return a:l
   endif
   let field_name = lsplit[0]
+  " Makes field tag
   let tag = '`json:"' . s:ToSnakeCase(field_name) . '"`'
   return a:l . ' ' . tag
 endfunction
