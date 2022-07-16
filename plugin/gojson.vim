@@ -69,6 +69,10 @@ function! s:AddJsonTag(l) abort
   return a:l . ' ' . tag
 endfunction
 
+function! s:ApplyTagsLine() abort
+  call s:ApplyTags(1)
+endfunction
+
 function! s:ToSnakeCase(input) abort
   let str = a:input
   let str = substitute(str, '\v(\u+)(\u\l)', '\1_\2', 'g')
@@ -76,12 +80,13 @@ function! s:ToSnakeCase(input) abort
   return tolower(str)
 endfunction
 
-" TODO: Provide number prefixable command
 xnoremap <silent> <Plug>GoJson :<C-u>'<,'>call <SID>ApplyTags()<CR>
 nnoremap <silent> <Plug>GoJson :<C-u>set opfunc=<SID>ApplyTagsOpFunc<CR>g@
+nnoremap <silent> <Plug>GoJsonLine :<C-u> call <SID>ApplyTagsLine()<CR>
 if g:gojson_map_keys
   xnoremap <leader>j <Plug>GoJson
   nnoremap <leader>j <Plug>GoJson
+  nnoremap <leader>jj <Plug>GoJsonLine
 endif
 
-command! -range Gojson call <SID>ApplyTags(<count>)
+command! -range GoJson call <SID>ApplyTags(<count>)
