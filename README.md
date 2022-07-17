@@ -50,7 +50,7 @@ Alternatively, make your own using this set of `<Plug>` mappings:
 n/x <Plug>Gojson
 n   <Plug>GojsonLine
 ```
-(n meaning normal mode compatible and x meaning visual mode compatible)
+(n meaning normal mode compatible and x meaning visual mode compatible).
 Again, enter `:help gojson` for more details!
 
 ## License
