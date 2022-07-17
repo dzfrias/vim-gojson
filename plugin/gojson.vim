@@ -80,13 +80,13 @@ function! s:ToSnakeCase(input) abort
   return tolower(str)
 endfunction
 
-xnoremap <silent> <Plug>Gojson     :<C-u>'<,'>call <SID>ApplyTags()<CR>
-nnoremap <silent> <Plug>Gojson     :<C-u>set opfunc=<SID>ApplyTagsOpFunc<CR>g@
-nnoremap <silent> <Plug>GojsonLine :<C-u> call <SID>ApplyTagsLine()<CR>
-if g:gojson_map_keys
-  xnoremap <leader>j  <Plug>Gojson
-  nnoremap <leader>j  <Plug>Gojson
-  nnoremap <leader>jj <Plug>GojsonLine
-endif
-
-command! -range Gojson call <SID>ApplyTags(<count>)
+autocmd Filetype go
+      \ xnoremap <silent> <Plug>Gojson     :<C-u>'<,'>call <SID>ApplyTags()<CR>
+      \ nnoremap <silent> <Plug>Gojson     :<C-u>set opfunc=<SID>ApplyTagsOpFunc<CR>g@
+      \ nnoremap <silent> <Plug>GojsonLine :<C-u> call <SID>ApplyTagsLine()<CR>
+      \ if g:gojson_map_keys
+        \ xnoremap <leader>j  <Plug>Gojson
+        \ nnoremap <leader>j  <Plug>Gojson
+        \ nnoremap <leader>jj <Plug>GojsonLine
+      \ endif
+      \ autocmd Filetype go command! -range Gojson call <SID>ApplyTags(<count>)
