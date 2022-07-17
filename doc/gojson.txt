@@ -1,4 +1,4 @@
-*gojson.txt* Moving around folding with ease.
+*gojson.txt* Generate struct JSON tags with ease
 
 Author:  Diego Frias
 License: MIT (see |gojson-license|)
@@ -8,31 +8,76 @@ Contents                                                    *gojson-contents*
 
 1. Usage..................................|gojson-usage|
 2. Mappings...............................|gojson-mappings|
-3. License................................|gojson-license|
+3. Commands...............................|gojson-commands|
+4. License................................|gojson-license|
 
 ===============================================================================
 1. Usage                                                       *gojson-usage*
 
-Used to move around folds, specifically moving up to a fold better. Instead of
-going to the nearest foldlevel that is not 0, gojson instead goes to the top
-of that folded section.
+Imagine you have a struct in Go: >
+    type MassiveStruct struct {
+        coolField    string
+        helpfulField bool
+        veryLong     int
+        TooLarge     bool
+        bigStruct    bool
+        cumbersome   string
+    }
+
+Now, if you wanted to export every single field into a JSON format, you'd have
+to manually add field tags to make it look like this: >
+    type MassiveStruct struct {
+        coolField    string `json:"cool_field"`
+        helpfulField bool   `json:"helpful_field"`
+        veryLong     int    `json:"very_long"`
+        TooLarge     bool   `json:"too_large"`
+        bigStruct    bool   `json:"big_struct"`
+        Cumbersome   string `json:"cumbersome"`
+    }
+
+With Gojson, this task can be done automatically for you! Simply use the `Gojson`
+command or the key bindings for easy use.
+More details can be found in the |gojson-commands| and |gojson-mappings| sections.
 
 ===============================================================================
 2. Mappings                                                 *gojson-mappings*
 
-To make custom mappings, the default mappings must be disabled using >
+Default key mappings in Gojson are disabled by default.
+To enable the mappings, use >
+        let g:gojson_map_keys = 1
 
-        let g:gojson_map_keys = 0
+This will map the following keys: >
+        xnoremap <leader>j  <Plug>Gojson
+        nnoremap <leader>j  <Plug>Gojson
+        nnoremap <leader>jj <Plug>GojsonLine
+
+All of these mappings will not do anything on lines that are not struct fields.
+
+More details of these mappings can be found in the subsections below.
 
 -------------------------------------------------------------------------------
-2.1 <Plug>FoldJumpUp
+2.1 <Plug>Gojson
 
-Go up to the nearest fold
+In a normal mode mapping, works as an operator, enabling things the `iw` motion
+or the `ap` motion so JSON tags can be applied to massive sections of text with
+ease.
 
-Default: noremap <s-k> <Plug>FoldJumpUp
+In visual mode, JSON tags will be applied to the selected text.
+
+-------------------------------------------------------------------------------
+2.2 <Plug>GojsonLine
+
+Applies a JSON tag to the current line.
 
 ===============================================================================
-3. License                                                   *gojson-license*
+3. Commands                                                  *gojson-commands*
+
+Only one command is provided by Gojson: `Gojson`
+The `Gojson` command works with a selected range of text. It applies JSON tags
+to every line in the selection.
+
+===============================================================================
+4. License                                                   *gojson-license*
 
 This plugin is copyright by Diego Frias and licensed under the MIT license.
 

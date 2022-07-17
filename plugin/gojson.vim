@@ -1,6 +1,6 @@
 " =============================================================================
 " File: plugin/gojson.vim
-" Description: Create struct field tags with ease
+" Description: Generate struct JSON tags with ease
 " Author: Diego Frias <github.com/dzfrias>
 " =============================================================================
 
