@@ -1,0 +1,39 @@
+*gojson.txt* Moving around folding with ease.
+
+Author:  Diego Frias
+License: MIT (see |gojson-license|)
+
+===============================================================================
+Contents                                                    *gojson-contents*
+
+1. Usage..................................|gojson-usage|
+2. Mappings...............................|gojson-mappings|
+3. License................................|gojson-license|
+
+===============================================================================
+1. Usage                                                       *gojson-usage*
+
+Used to move around folds, specifically moving up to a fold better. Instead of
+going to the nearest foldlevel that is not 0, gojson instead goes to the top
+of that folded section.
+
+===============================================================================
+2. Mappings                                                 *gojson-mappings*
+
+To make custom mappings, the default mappings must be disabled using >
+
+        let g:gojson_map_keys = 0
+
+-------------------------------------------------------------------------------
+2.1 <Plug>FoldJumpUp
+
+Go up to the nearest fold
+
+Default: noremap <s-k> <Plug>FoldJumpUp
+
+===============================================================================
+3. License                                                   *gojson-license*
+
+This plugin is copyright by Diego Frias and licensed under the MIT license.
+
+vim:ft=help
