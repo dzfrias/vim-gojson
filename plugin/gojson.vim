@@ -63,7 +63,7 @@ function! s:AddJsonTag(l) abort
   if len(lsplit) == 0
     return a:l
   endif
-  let field_name = lsplit[0]
+  let field_name = trim(lsplit[0])
   " Makes field tag
   let tag = '`json:"' . s:ToSnakeCase(field_name) . '"`'
   return a:l . ' ' . tag
@@ -81,12 +81,12 @@ function! s:ToSnakeCase(input) abort
 endfunction
 
 autocmd Filetype go
-      \ xnoremap <silent> <Plug>Gojson     :<C-u>'<,'>call <SID>ApplyTags()<CR>
-      \ nnoremap <silent> <Plug>Gojson     :<C-u>set opfunc=<SID>ApplyTagsOpFunc<CR>g@
-      \ nnoremap <silent> <Plug>GojsonLine :<C-u> call <SID>ApplyTagsLine()<CR>
-      \ if g:gojson_map_keys
-        \ xnoremap <leader>j  <Plug>Gojson
-        \ nnoremap <leader>j  <Plug>Gojson
-        \ nnoremap <leader>jj <Plug>GojsonLine
-      \ endif
+      \ xnoremap <silent> <Plug>Gojson     :<C-u>'<,'>call <SID>ApplyTags()<CR> |
+      \ nnoremap <silent> <Plug>Gojson     :<C-u>set opfunc=<SID>ApplyTagsOpFunc<CR>g@ |
+      \ nnoremap <silent> <Plug>GojsonLine :<C-u> call <SID>ApplyTagsLine()<CR> |
+      \ if g:gojson_map_keys |
+        \ xnoremap <leader>j  <Plug>Gojson |
+        \ nnoremap <leader>j  <Plug>Gojson |
+        \ nnoremap <leader>jj <Plug>GojsonLine |
+      \ endif |
       \ command! -range Gojson call <SID>ApplyTags(<count>)
