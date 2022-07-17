@@ -14,7 +14,7 @@ let g:loaded_gojson = 1
 const s:field_regex = '\v^\s*\w+\s+\w+$'
 
 if !exists('g:gojson_map_keys')
-  let g:gojson_map_keys = 1
+  let g:gojson_map_keys = 0
 endif
 
 function! s:ApplyTags(count=0) abort
