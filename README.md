@@ -2,24 +2,24 @@
 Imagine you have a struct:
 ```go
 type MassiveStruct struct {
-    coolField string
+    coolField    string
     helpfulField bool
-    veryLong int
-    TooLarge bool
-    bigStruct bool
-    cumbersome string
+    veryLong     int
+    TooLarge     bool
+    bigStruct    bool
+    cumbersome   string
 }
 ```
 Now, if you wanted to export every single field into a JSON format, you'd have
 to manually add field tags to make it look like this:
 ```go
 type MassiveStruct struct {
-    coolField string `json:"cool_field"`
-    helpfulField bool `json:"helpful_field"`
-    veryLong int `json:"very_long"`
-    TooLarge bool `json:"too_large"`
-    bigStruct bool `json:"big_struct"`
-    Cumbersome string `json:"cumbersome"`
+    coolField    string `json:"cool_field"`
+    helpfulField bool   `json:"helpful_field"`
+    veryLong     int    `json:"very_long"`
+    TooLarge     bool   `json:"too_large"`
+    bigStruct    bool   `json:"big_struct"`
+    Cumbersome   string `json:"cumbersome"`
 }
 ```
 That can take quite some time. That's why gojson exists!
