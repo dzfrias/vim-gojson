@@ -89,4 +89,4 @@ autocmd Filetype go
         \ nnoremap <leader>j  <Plug>Gojson
         \ nnoremap <leader>jj <Plug>GojsonLine
       \ endif
-      \ autocmd Filetype go command! -range Gojson call <SID>ApplyTags(<count>)
+      \ command! -range Gojson call <SID>ApplyTags(<count>)
