@@ -17,6 +17,8 @@ if !exists('g:gojson_map_keys')
   let g:gojson_map_keys = 0
 endif
 
+" ApplyTags applies JSON tags to every selected field (in visual) or every
+" selected line when entering it as a command.
 function! s:ApplyTags(count=0) abort
   " Count is applied if the user enters this as a command over selected text
   if a:count > 1
@@ -34,6 +36,7 @@ function! s:ApplyTags(count=0) abort
   call setline(lnum, newl)
 endfunction
 
+" ApplyTagsOpFunc applies JSON tags to every line in a given motion
 function! s:ApplyTagsOpFunc(type) abort
   " Only works if motion is linewise
   if a:type !=? 'line'
@@ -44,6 +47,7 @@ function! s:ApplyTagsOpFunc(type) abort
   call s:ApplyTagsLoop(lines)
 endfunction
 
+" ApplyTagsLoop applies JSON tags to every line in a given list of lines
 function! s:ApplyTagsLoop(lines) abort
   let curline = line('.')
   " Loop over the lines and apply a tag to them if they match the regex
@@ -58,6 +62,7 @@ function! s:ApplyTagsLoop(lines) abort
   endfor
 endfunction
 
+" AddJsonTag computes the new line with the JSON tag added
 function! s:AddJsonTag(l) abort
   let lsplit = split(a:l, ' ')
   if len(lsplit) == 0
@@ -69,10 +74,12 @@ function! s:AddJsonTag(l) abort
   return a:l . ' ' . tag
 endfunction
 
+" ApplyTagsLine applies tags to the current line
 function! s:ApplyTagsLine() abort
   call s:ApplyTags(1)
 endfunction
 
+" ToSnakeCase converts a string to snake_case
 function! s:ToSnakeCase(input) abort
   let str = a:input
   let str = substitute(str, '\v(\u+)(\u\l)', '\1_\2', 'g')
